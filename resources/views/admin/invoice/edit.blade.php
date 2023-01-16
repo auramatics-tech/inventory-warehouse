@@ -159,4 +159,5 @@
     //   document.getElementById("invoice_total").innerHTML = invoice_total;
     }
 </script>
+
 @endsection

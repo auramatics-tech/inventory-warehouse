@@ -66,7 +66,7 @@
                                                                             <td class="pt-6">{{$product->name}}</td>
 																			<td class="pt-6">{{$invoice['qty'][$product_key]}}</td>
 																			<td class="pt-6">{{$invoice['price'][$product_key]}}</td>
-																			<td class="pt-6 text-dark fw-boldest">{{$invoice['total_price'][$product_key]}}</td>
+																			<td class="pt-6">{{$invoice['total_price'][$product_key]}}</td>
                                                                             @endforeach
 																		</tr>
                                                                      @endforeach
@@ -84,7 +84,7 @@
 																		<div class="fw-bold pe-10 text-gray-600 fs-7">Total</div>
 																		<!--end::Code-->
 																		<!--begin::Label-->
-																		<div class="text-end fw-bolder fs-6 text-gray-800" id="val"></div>
+																		<div class="text-end fw-bolder fs-6 text-dark fw-boldest" id="val"></div>
 																		<!--end::Label-->
 																	</div>
 																	<!--end::Item-->
@@ -120,7 +120,7 @@
                 sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
             }
             
-            document.getElementById("val").innerHTML = sumVal;
+            document.getElementById("val").innerHTML ="$" + sumVal;
             console.log(sumVal);
             
         </script>
