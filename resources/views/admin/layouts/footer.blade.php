@@ -1,22 +1,22 @@
-<!--begin::Footer-->
-<div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
+<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
     <!--begin::Container-->
     <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
         <!--begin::Copyright-->
         <div class="text-dark order-2 order-md-1">
-            <span class="text-muted font-weight-bold mr-2">{{ date('Y') }}©</span>
-            <a href="http://keenthemes.com/metronic" target="_blank"
-                class="text-dark-75 text-hover-primary">{{ config('app.name') }}</a>
+            <span class="text-muted fw-bold me-1">{{ date('Y') }}©</span>
+            <a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">{{ config('app.name') }}</a>
         </div>
         <!--end::Copyright-->
-        <!--begin::Nav-->
-        <div class="nav nav-dark">
-            {{-- <a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-0 pr-5">About</a>
-            <a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-0 pr-5">Team</a>
-            <a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-0 pr-0">Contact</a> --}}
-        </div>
-        <!--end::Nav-->
+        <!--begin::Menu-->
+      {{-- <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
+            <li class="menu-item">
+                <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
+            </li>
+            <li class="menu-item">
+                <a href="https://keenthemes.com/support" target="_blank" class="menu-link px-2">Support</a>
+            </li>
+        </ul>--}} 
+        <!--end::Menu-->
     </div>
     <!--end::Container-->
 </div>
-<!--end::Footer-->

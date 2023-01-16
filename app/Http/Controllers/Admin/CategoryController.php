@@ -14,9 +14,11 @@ use Helper;
 class CategoryController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::where('active', 1)->orderby('id','desc')->get();
+        $categories = Category::when(isset($request->q), function ($query) use ($request) {
+            $query->whereRaw("(name LIKE '%" . $request->q . "%')");
+        })->orderby('id', 'desc')->paginate(10);
         return view('admin.category.index', compact('categories'));
     }
     public function create_category(){
@@ -27,6 +29,9 @@ class CategoryController extends Controller
         return view('admin.category.create',compact('category'));
     }
     public function store_category(Request $request){
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255','unique:categories,name,id'],
+        ]);
         if(isset($request->id)){
             $category = Category::Find($request->id);
         }else{
@@ -35,11 +40,11 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->active = isset($request->active) ? 1 : 0;
         $category->save();
-        return redirect()->route('admin.category')->with('success','data updated successfully');
+        return redirect()->route('admin.category')->with('success','Data updated successfully');
     }
     public function delete_category($id){
         $category = Category::Find($id);
         $category->delete();
-        return back()->with('success','data deleted successfulyy');
+        return back()->with('success','Data deleted successfully');
     }
 }

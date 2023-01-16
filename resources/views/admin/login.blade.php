@@ -35,7 +35,7 @@
                                     <input type="checkbox" name="remember" />
                                     <span></span>Remember me</label>
                             </div>
-                            <a href="javascript:;" id="kt_login_forgot" class="text-muted text-hover-primary">Forget
+                            <a href="{{url('forgot-password')}}" id="kt_login_forgot" class="text-muted text-hover-primary">Forget
                                 Password ?</a>
                         </div>
                         <button type="submit" id="kt_login_signin_submit"

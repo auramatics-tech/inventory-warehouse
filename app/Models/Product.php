@@ -20,4 +20,8 @@ class Product extends Model
     {
         return $this->hasOne(Category::class, 'id', 'category')->latest();
     }
+    protected function get_supplier_name()
+    {
+        return $this->hasOne(Supplier::class, 'id', 'supplier_id')->latest();
+    }
 }

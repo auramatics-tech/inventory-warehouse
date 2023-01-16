@@ -1,125 +1,175 @@
 @extends('admin.layouts.master')
 
 @section('content')
-
-<!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-    <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
-            <div class="d-flex align-items-center flex-wrap mr-1">
-                <!--begin::Page Heading-->
-                <div class="d-flex align-items-baseline flex-wrap mr-5">
-                    <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">
-                       User
-                    </h5>
-                    <!--end::Page Title-->
+<div class="post d-flex flex-column-fluid" id="kt_post">
+    <!--begin::Container-->
+    <div id="kt_content_container" class="container-xxl">
+        <!--begin::Card-->
+        <div class="card">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <!--begin::Search-->
+                    <form class="d-flex align-items-center position-relative my-1" method="get">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <input type="text" class="form-control form-control-solid w-250px ps-14" placeholder="Search User" value="{{isset(request()->q) ? request()->q : ''}}" name="q">
+                    </form>
+                    <!--end::Search-->
                 </div>
-                <!--end::Page Heading-->
-            </div>
-            <!--end::Info-->
-        </div>
-    </div>
-    <!--end::Subheader-->
-    <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
-        <!--begin::Container-->
-        <div class="container">
-            <!--begin::Card-->
-            <div class="card card-custom">
-                <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                    <div class="card-title">
-                        <h3 class="card-label"> User
-                             <!-- <span class="d-block text-muted pt-2 font-size-sm">     Category</span> -->
-                        </h3>
-                    </div>
-                    <div class="card-toolbar">
-                        <!--begin::Button-->
-                        <a href="{{Route('admin.create_user')}}" class="new_record btn btn-primary font-weight-bolder">
-                            <span class="svg-icon svg-icon-md">
-                                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <rect x="0" y="0" width="24" height="24" />
-                                        <circle fill="#000000" cx="9" cy="15" r="6" />
-                                        <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3" />
-                                    </g>
+                <!--begin::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                    <!--begin::Toolbar-->
+                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                        <!--begin::Add user-->
+                        <a href="{{Route('admin.create_user')}}" type="button" class="btn btn-primary">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black"></rect>
+                                    <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
                                 </svg>
-                                <!--end::Svg Icon-->
-                            </span>New user </a>
-                        <!--end::Button-->
+                            </span>
+                            <!--end::Svg Icon-->Add User</a>
+                        <!--end::Add user-->
                     </div>
+                    <!--end::Toolbar-->
                 </div>
-                <div class="card-body">
-                    <!--begin: Search Form-->
-                    <!--begin::Search Form-->
-                    <div class="mb-7">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 col-xl-8">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4 my-2 my-md-0">
-                                        <div class="input-icon">
-                                            <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
-                                            <span>
-                                                <i class="flaticon2-search-1 text-muted"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 my-2 my-md-0">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                            </div>
-                        </div>
-                    </div>
-                    @if(Session::has('success'))
+                <!--end::Card toolbar-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-0">
+                <!--begin::Table-->
+                @if(Session::has('success'))
                     <div class="alert alert-success text-center">
                         {{Session::get('success')}}
                     </div>
                     @endif
-                    <!--end::Search Form-->
-                    <!--end: Search Form-->
-                    <!--begin: Datatable-->
-                    <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone No.</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if(count($users))
-                            @foreach($users as $key => $user)
-                            <tr>
-                            <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->phone_no}}</td>
-                                <td>
-                                    <a href="{{route('admin.edit_user',$user->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="javascript:" rel="{{ $user->id }}" rel1="delete-user" class="deleteRecord btn btn-danger btn-sm">Delete</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                    <!--end: Datatable-->
+                <div id="kt_table_users_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_table_users">
+                            <!--begin::Table head-->
+                            <thead>
+                                <!--begin::Table row-->
+                                <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                    {{--<th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label="
+														
+															
+														
+													" style="width: 29.25px;">
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1">
+                                        </div>
+                                    </th>--}}
+                                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Name</th>
+                                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Email</th>
+                                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Phone no.</th>
+
+                                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Two-step: activate to sort column ascending" style="width: 125px;">Created At</th>
+                                    <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">Actions</th>
+                                </tr>
+                                <!--end::Table row-->
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody class="text-gray-600 fw-bold">
+                                <!--begin::Table row-->
+                                @if(count($users))
+                                @foreach($users as $key => $user)
+
+                                <tr class="odd">
+                                    <!--begin::Checkbox-->
+                                    {{--<td>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="1">
+                                        </div>
+                                    </td>--}}
+                                    <!--end::Checkbox-->
+                                    <!--begin::User=-->
+                                    <td class="d-flex align-items-center">
+                                        <!--begin::User details-->
+                                        <div class="d-flex flex-column">
+                                            <a href="" class="text-gray-800 text-hover-primary mb-1">{{$user->name}}</a>
+                                        </div>
+                                        <!--begin::User details-->
+                                    </td>
+                                    <!--end::User=-->
+                                    <!--begin::Role=-->
+                                    <td>{{ isset($user->email) ? $user->email :'' }}</td>
+                                <td>{{ isset($user->phone_no) ? $user->phone_no :'' }}</td>
+                                    <!--end::Role=-->
+                                    <!--begin::Last login=-->
+                                    <td data-order="2023-01-08T12:00:52+05:30">
+                                        <div class="badge badge-light fw-bolder">{{ date('F d, Y', strtotime($user->created_at))}}</div>
+                                    </td>
+                                    <!--begin::Action=-->
+                                    <td class="text-end">
+                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                            <span class="svg-icon svg-icon-5 m-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon--></a>
+                                        <!--begin::Menu-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="{{route('admin.edit_user',$user->id)}}" class="menu-link px-3">Edit</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="javascript:" rel="{{ $user->id }}" rel1="delete-user" class="deleteRecord menu-link px-3">Delete</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                        </div>
+                                        <!--end::Menu-->
+                                    </td>
+                                    <!--end::Action=-->
+                                </tr>
+                                @endforeach
+                                @endif
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start"></div>
+                        <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                            <div class="dataTables_paginate paging_simple_numbers" id="kt_table_users_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button page-item previous disabled" id="kt_table_users_previous"><a href="#" aria-controls="kt_table_users" data-dt-idx="0" tabindex="0" class="page-link"><i class="previous"></i></a></li>
+                                    <li class="paginate_button page-item active"><a href="#" aria-controls="kt_table_users" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="kt_table_users" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="kt_table_users" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                    <li class="paginate_button page-item next" id="kt_table_users_next"><a href="#" aria-controls="kt_table_users" data-dt-idx="4" tabindex="0" class="page-link"><i class="next"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="row text-end">
+                    {{ $users->withQueryString()->onEachSide(0)->links("pagination::bootstrap-4") }} 
+                    </div>
                 </div>
+                <!--end::Table-->
             </div>
-            <!--end::Card-->
+            <!--end::Card body-->
         </div>
-        <!--end::Container-->
+        <!--end::Card-->
     </div>
-    <!--end::Entry-->
+    <!--end::Container-->
 </div>
-<!--end::Content-->
 
 @endsection
 
