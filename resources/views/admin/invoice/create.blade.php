@@ -35,7 +35,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-4 mb-3">
                                         <label for="" class="mb-3">Supplier Name</label>
-                                          <input value="{{ isset($invoice->supplier_name) ? $invoice->supplier_name: '' }}" type="text" class="form-control" name="supplier_name" id="supplier_name" placeholder="Supplier Name">
+                                          <input value="{{ isset($invoice->supplier_name) ? $invoice->supplier_name: '' }}" type="text" class="form-control" name="supplier_name" id="supplier_name" placeholder="Supplier Name" required>
                                     </div>
                                     <div class="form-group col-md-4 mb-3">
                                         <label for="" class="mb-3">Supplier Invoice Number</label>
@@ -55,7 +55,7 @@
                                     <div class="form-group col-md-3 mb-3">
                                         <label for="" class="mb-3">Product Number</label>
                                         <select name="product_id[]" id="product_code" class="form-control">
-                                                <option>Select Product Number</option>
+                                                <option value="">Select Product Number</option>
                                                 @if(count($products))
                                                 @foreach($products as $key => $product)
                                                 <option value="{{$product->id}}"  @if(isset($invoice->product_id)) selected @endif>{{$product->product_code}}</option>
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="form-group col-md-3 mb-3">
                                         <label for="" class="mb-3">Product Name</label>
-                                        <input value="{{ isset($invoice->product_name) ? $invoice->product_name: '' }}" type="text" class="form-control" name="product_name" id="product_name" placeholder="Product Name">
+                                        <input value="{{ isset($invoice->product_name) ? $invoice->product_name: '' }}" type="text" class="form-control" name="product_name" id="product_name" placeholder="Product Name" required>
                                     </div>
                                     <div class="form-group col-md-2 mb-3">
                                         <label for="" class="mb-3">Qty</label>
@@ -80,9 +80,9 @@
                                         <input value="{{ isset($invoice->total_price) ? $invoice->total_price: '' }}" type="number" class="form-control total_input" name="total_price[]" id="total_price" placeholder="Total Price" required>
                                     </div>
                                 </div>
-                                <hr style="border-top: 1px solid #eff2f5;opacity: 1;">
+                                
                             </div>
-                              
+                              <hr style="border-top: 1px solid #eff2f5;opacity: 1;">
                                 <div class="row mt-5">
                                     <div class="form-group col-md-2 mb-3 ms-auto">
                                         <label for="" class="mb-3">Invoice Total</label>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="card-footer">
                             <button type="submit" id="user_submit" class="btn btn-primary me-3">Submit</button>
-                            <a href="{{ route('admin.new_invoice') }}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{ route('admin.invoice') }}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                     <!--end::Form-->
@@ -115,7 +115,7 @@
     var rowNum = 0;
         function addRow(frm) {
         rowNum ++;
-        var row ='<div id="rowNum'+rowNum+'" class="row mt-10"><div class="form-group col-md-3 mb-3"><label for="" class="mb-3">Product Number</label><select name="product_id[]" id="product_code" class="form-control"><option>Select Product Number</option>@if(count($products))@foreach($products as $key => $product)<option value="{{$product->id}}" @if(isset($invoice->product_id)) selected @endif>{{$product->product_code}}</option>@endforeach @endif</select></div><div class="form-group col-md-3 mb-3"><label for="" class="mb-3">Product Name</label><input value="{{ isset($invoice->product_name) ? $invoice->product_name: '' }}" type="text" class="form-control" name="product_name[]" id="product_name" placeholder="Product Name"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Qty</label><input value="{{ isset($invoice->qty) ? $invoice->qty: '' }}" type="number" class="form-control qty_input" name="qty[]" id="qty_input_'+rowNum+'" placeholder="Qty"  onkeyup="add_number_m('+rowNum+')"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Price/item</label><input value="{{ isset($invoice->price) ? $invoice->price: '' }}" type="number" class="form-control price_input" name="price[]" id="price_input_'+rowNum+'" placeholder="Price "  onkeyup="add_number_m('+rowNum+')"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Total Price</label><input value="{{ isset($invoice->total_price) ? $invoice->total_price: '' }}" type="number" class="form-control" name="total_price[]" id="total_price_'+rowNum+'" placeholder="Total Price" onclick="final_sum()"></div><input type="button" class="text-white bg-danger cancel_row" value="X" onclick="removeRow('+rowNum+');"><hr class="mt-3" style="border-top: 1px solid #eff2f5;opacity: 1;"></div>'
+        var row ='<div id="rowNum'+rowNum+'" class="row mt-10"><div class="form-group col-md-3 mb-3"><label for="" class="mb-3">Product Number</label><select name="product_id[]" id="product_code" class="form-control"><option value="">Select Product Number</option>@if(count($products))@foreach($products as $key => $product)<option value="{{$product->id}}" @if(isset($invoice->product_id)) selected @endif>{{$product->product_code}}</option>@endforeach @endif</select></div><div class="form-group col-md-3 mb-3"><label for="" class="mb-3">Product Name</label><input value="{{ isset($invoice->product_name) ? $invoice->product_name: '' }}" type="text" class="form-control" name="product_name[]" id="product_name" placeholder="Product Name"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Qty</label><input value="{{ isset($invoice->qty) ? $invoice->qty: '' }}" type="number" class="form-control qty_input" name="qty[]" id="qty_input_'+rowNum+'" placeholder="Qty"  onkeyup="add_number_m('+rowNum+')"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Price/item</label><input value="{{ isset($invoice->price) ? $invoice->price: '' }}" type="number" class="form-control price_input" name="price[]" id="price_input_'+rowNum+'" placeholder="Price "  onkeyup="add_number_m('+rowNum+')"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Total Price</label><input value="{{ isset($invoice->total_price) ? $invoice->total_price: '' }}" type="number" class="form-control" name="total_price[]" id="total_price_'+rowNum+'" placeholder="Total Price" onclick="final_sum()"></div><input type="button" class="text-white bg-danger cancel_row" value="X" onclick="removeRow('+rowNum+');"></div>'
         jQuery('#itemRows').append(row);
         frm.product_id.value = '';
         frm.product_name.value = '';

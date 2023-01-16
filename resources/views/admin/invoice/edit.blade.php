@@ -9,7 +9,7 @@
         padding: 2px 4px;
     border: 0;
     border-radius: 4px;
-    margin-top:-23px;
+  margin-top:-15px;
     }
 </style>
 @endsection
@@ -51,8 +51,9 @@
                                 <div class="d-flex justify-content-end" >
                                 <input onclick="addRow(this.form);" type="button" class="btn btn-primary py-2" value=" + Add row" />
                                 </div>
+                              
                                 @foreach( $invoice['product_id']  as $product_key => $data)
-                                <div class="row mt-5">
+                                <div class="row mt-5"  id="rowNum{{$product_key}}">
                                     <div class="form-group col-md-3 mb-3">
                                         <label for="" class="mb-3">Product Number</label>
                                         <select name="product_id[]" id="product_code" class="form-control">
@@ -70,21 +71,26 @@
                                     </div>
                                     <div class="form-group col-md-2 mb-3">
                                         <label for="" class="mb-3">Qty</label>
-                                        <input value="{{$invoice['qty'][$product_key]}}" type="number" class="form-control " name="qty[]" id="qty_input" placeholder="Qty" onkeyup="add_number()" required>
+                                        <input value="{{$invoice['qty'][$product_key]}}" type="number" class="form-control " name="qty[]" id="qty_input__{{$product_key}}" placeholder="Qty" onkeyup="add_number('{{$product_key}}')" required>
                                     </div>
                                     <div class="form-group col-md-2 mb-3">
                                         <label for="" class="mb-3">Price/item</label>
-                                        <input value="{{$invoice['price'][$product_key]}}" type="number" class="form-control price_input" name="price[]" id="price_input" placeholder="Price " onkeyup="add_number()" required>
+                                        <input value="{{$invoice['price'][$product_key]}}" type="number" class="form-control price_input" name="price[]" id="price_input__{{$product_key}}" placeholder="Price " onkeyup="add_number('{{$product_key}}')" required>
                                     </div>
                                     <div class="form-group col-md-2 mb-3">
                                         <label for="" class="mb-3">Total Price</label>
-                                        <input value="{{$invoice['total_price'][$product_key]}}" type="number" class="form-control total_input" name="total_price[]" id="total_price_{{$product_key}}" placeholder="Total Price" required>
+                                        <input value="{{$invoice['total_price'][$product_key]}}" type="number" class="form-control total_input" name="total_price[]" id="total_price__{{$product_key}}" placeholder="Total Price" required>
                                     </div>
+                                    @if($product_key)
+                                    <input type="button" class="text-white bg-danger cancel_row " value="X" onclick="removeRow1('{{$product_key}}');">
+                                    @endif
+                                 
                                 </div>
-                                <hr style="border-top: 1px solid #eff2f5;opacity: 1;">
                                 @endforeach
-                            </div>
+                               
                               
+                            </div>
+                                <hr style="border-top: 1px solid #eff2f5;opacity: 1;">
                                 <div class="row mt-5">
                                     <div class="form-group col-md-2 mb-3 ms-auto">
                                         <label for="" class="mb-3">Invoice Total</label>
@@ -96,7 +102,7 @@
                         </div>
                         <div class="card-footer">
                             <button type="submit" id="user_submit" class="btn btn-primary me-3">Submit</button>
-                            <a href="{{ route('admin.new_invoice') }}" class="btn btn-secondary">Cancel</a>
+                            <a href="{{ route('admin.invoice') }}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                     <!--end::Form-->
@@ -115,29 +121,32 @@
 <!--end::Page Scripts-->
 <script>
     var rowNum = 0;
-function addRow(frm) {
-rowNum ++;
-var row ='<div id="rowNum'+rowNum+'" class="row mt-10"><div class="form-group col-md-3 mb-3"><label for="" class="mb-3">Product Number</label><select name="product_id[]" id="product_code" class="form-control"><option>Select Product Number</option>@if(count($products))@foreach($products as $key => $product)<option value="{{$product->id}}">{{$product->product_code}}</option>@endforeach @endif</select></div><div class="form-group col-md-3 mb-3"><label for="" class="mb-3">Product Name</label><input value="" type="text" class="form-control" name="product_name[]" id="product_name" placeholder="Product Name"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Qty</label><input value="" type="number" class="form-control qty_input" name="qty[]" id="qty_input_'+rowNum+'" placeholder="Qty"  onkeyup="add_number_m('+rowNum+')"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Price/item</label><input value="" type="number" class="form-control price_input" name="price[]" id="price_input_'+rowNum+'" placeholder="Price "  onkeyup="add_number_m('+rowNum+')"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Total Price</label><input value="" type="number" class="form-control" name="total_price[]" id="total_price_'+rowNum+'" placeholder="Total Price" onclick="final_sum()"></div><input type="button" class="text-white bg-danger cancel_row" value="X" onclick="removeRow('+rowNum+');"><hr class="mt-3" style="border-top: 1px solid #eff2f5;opacity: 1;"></div>'
-jQuery('#itemRows').append(row);
-frm.product_id.value = '';
-frm.product_name.value = '';
-frm.qty.value = '';
-frm.price.value = '';
-frm.total_price.value = '';
-}
-function removeRow(rnum) {
-jQuery('#rowNum'+rnum).remove();
-}
-        var mytotal;
-    function add_number() {
-      var first_number = parseFloat(document.getElementById("qty_input").value);
+    function addRow(frm) {
+    rowNum ++;
+    var row ='<div id="rowNum'+rowNum+'" class="row mt-10"><div class="form-group col-md-3 mb-3"><label for="" class="mb-3">Product Number</label><select name="product_id[]" id="product_code" class="form-control"><option>Select Product Number</option>@if(count($products))@foreach($products as $key => $product)<option value="{{$product->id}}">{{$product->product_code}}</option>@endforeach @endif</select></div><div class="form-group col-md-3 mb-3"><label for="" class="mb-3">Product Name</label><input value="" type="text" class="form-control" name="product_name[]" id="product_name" placeholder="Product Name"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Qty</label><input value="" type="number" class="form-control qty_input" name="qty[]" id="qty_input_'+rowNum+'" placeholder="Qty"  onkeyup="add_number_m('+rowNum+')"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Price/item</label><input value="" type="number" class="form-control price_input" name="price[]" id="price_input_'+rowNum+'" placeholder="Price "  onkeyup="add_number_m('+rowNum+')"></div><div class="form-group col-md-2 mb-3"><label for="" class="mb-3">Total Price</label><input value="" type="number" class="form-control" name="total_price[]" id="total_price_'+rowNum+'" placeholder="Total Price" onclick="final_sum()"></div><input type="button" class="text-white bg-danger cancel_row" value="X" onclick="removeRow('+rowNum+');"></div>'
+    jQuery('#itemRows').append(row);
+    frm.product_id.value = '';
+    frm.product_name.value = '';
+    frm.qty.value = '';
+    frm.price.value = '';
+    frm.total_price.value = '';
+    }
+    function removeRow(rnum) {
+    jQuery('#rowNum'+rnum).remove();
+    }
+    function removeRow1(rnum) {
+    jQuery('#rowNum'+rnum).remove();
+    }
+    var mytotal;
+    function add_number(rnum) {
+      var first_number = parseFloat(document.getElementById("qty_input__"+rnum).value);
       if (isNaN(first_number)) first_number = 0;
-      var second_number = parseFloat(document.getElementById("price_input").value);
+      var second_number = parseFloat(document.getElementById("price_input__"+rnum).value);
       if (isNaN(second_number)) second_number = 0;
       var result = first_number * second_number;
-      document.getElementById("total_price").value = result;
-      mytotal = result;
-      document.getElementById("invoice_total").innerHTML = mytotal;
+      document.getElementById("total_price__"+ rnum).value = result;
+    //   mytotal = result;
+    //   document.getElementById("invoice_total").innerHTML = mytotal;
     }
     function add_number_m(rnum) {
       var first_number = parseFloat(document.getElementById("qty_input_"+rnum).value);
@@ -146,8 +155,8 @@ jQuery('#rowNum'+rnum).remove();
       if (isNaN(second_number)) second_number = 0;
       var result = first_number * second_number;
       document.getElementById("total_price_"+ rnum).value = result;
-      var invoice_total = mytotal + result;
-      document.getElementById("invoice_total").innerHTML = invoice_total;
+    //   var invoice_total = mytotal + result;
+    //   document.getElementById("invoice_total").innerHTML = invoice_total;
     }
 </script>
 @endsection

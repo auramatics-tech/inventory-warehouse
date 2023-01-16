@@ -81,4 +81,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/edit-invoice/{id}', [InvoiceController::class, 'edit_invoice'])->name('admin.edit_invoice');
     Route::get('/delete-invoice/{id}', [InvoiceController::class, 'delete_invoice'])->name('admin.delete_invoice');
     Route::post('/store-invoice', [InvoiceController::class, 'store_invoice'])->name('admin.store_invoice');
+    Route::get('/invoice-detail/{id}', [InvoiceController::class, 'invoice_detail'])->name('admin.invoice_detail');
 }); 

@@ -73,7 +73,7 @@
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Supplier Name</th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Supplier Invoice No.</th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Invoice Date</th>
-                                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Product Code</th>
+                                    {{-- <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Product Code</th> --}}
                                     <!-- <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Role: activate to sort column ascending" style="width: 125px;">Qty</th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Role: activate to sort column ascending" style="width: 125px;">Price</th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Role: activate to sort column ascending" style="width: 125px;">Total Price</th> -->
@@ -101,7 +101,7 @@
                                     <td class="d-flex align-items-center">
                                         <!--begin::User details-->
                                         <div class="d-flex flex-column">
-                                            <a href="" class="text-gray-800 text-hover-primary mb-1">{{isset($invoice->supplier_name) ? $invoice->supplier_name :'' }}</a>
+                                            <a href="{{route('admin.invoice_detail',$invoice->id)}}" class="text-gray-800 text-hover-primary mb-1">{{isset($invoice->supplier_name) ? $invoice->supplier_name :'' }}</a>
                                         </div>
                                         <!--begin::User details-->
                                     </td>
@@ -111,7 +111,7 @@
                                     <td data-order="2023-01-08T12:00:52+05:30">
                                         <div class="badge badge-light fw-bolder">{{ date('F d, Y', strtotime($invoice->invoice_date))}}</div>
                                     </td>
-                                    <td>{{$invoice->product_id}}</td>                          
+                                    {{-- <td>{{$invoice->product_id}}</td>                           --}}
                                     <td data-order="2023-01-08T12:00:52+05:30">
                                         <div class="badge badge-light fw-bolder">{{ date('F d, Y', strtotime($invoice->created_at))}}</div>
                                     </td>

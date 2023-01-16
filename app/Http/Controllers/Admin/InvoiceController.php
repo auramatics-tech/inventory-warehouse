@@ -74,4 +74,13 @@ class InvoiceController extends Controller
         $invoice->save();
         return redirect()->route('admin.invoice')->with('success','data updated successfully');
     }
+    public function invoice_detail(Request $request ,$id){
+        $invoice = Invoice::Find($id);
+        $products = Product::orderby('id','desc')->get();
+        $invoice['product_id'] = json_decode($invoice['product_id'],true);
+        $invoice['qty'] = json_decode($invoice['qty'],true);
+        $invoice['price'] = json_decode($invoice['price'],true);
+        $invoice['total_price'] = json_decode($invoice['total_price'],true);
+        return view('admin.invoice.invoice_detail',compact('invoice','products'));
+    }
 }

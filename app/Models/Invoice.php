@@ -14,9 +14,9 @@ class Invoice extends Model
     protected $fillable = [
         'supplier_id'
     ];
-    // protected function get_supplier_name()
-    // {
-    //     return $this->hasOne(Supplier::class, 'id', 'supplier_id')->latest();
-    // }
-  
+    protected function get_product_detail()
+    {
+        return $this->hasMany(Product::class, 'id', 'product_id')->latest();
+    }
+    
 }
