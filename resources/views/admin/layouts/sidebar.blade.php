@@ -199,7 +199,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Previous invoice</span>
+                                <span class="menu-title">Lookup invoice</span>
                             </a>
                         </div>
                     </div>

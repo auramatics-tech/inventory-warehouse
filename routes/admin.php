@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/edit-product/{id}', [ProductController::class, 'edit_product'])->name('admin.edit_product');
     Route::get('/delete-product/{id}', [ProductController::class, 'delete_product'])->name('admin.delete_product');
     Route::post('/store-product', [ProductController::class, 'store_product'])->name('admin.store_product');
+    Route::post('/store-product-modal', [ProductController::class, 'store_product'])->name('admin.store_product');
 
     Route::post('change-password', [AdminController::class, 'change_password'])->name('admin.change_password');
     Route::post('update-profile', [AdminController::class, 'update_profile'])->name('admin.update_profile');
@@ -78,6 +79,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     Route::get('/invoice', [InvoiceController::class, 'index'])->name('admin.invoice');
     Route::get('/new-invoice', [InvoiceController::class, 'create_invoice'])->name('admin.new_invoice');
+    Route::post('/get-product-code', [InvoiceController::class, 'get_product_code'])->name('admin.get_product_code');
     Route::get('/edit-invoice/{id}', [InvoiceController::class, 'edit_invoice'])->name('admin.edit_invoice');
     Route::get('/delete-invoice/{id}', [InvoiceController::class, 'delete_invoice'])->name('admin.delete_invoice');
     Route::post('/store-invoice', [InvoiceController::class, 'store_invoice'])->name('admin.store_invoice');

@@ -51,23 +51,23 @@
 																<table class="table mb-3" id="table">
 																	<thead>
 																		<tr class="border-bottom fs-6 fw-bolder text-muted">
-																			<th class="min-w-175px pb-2">Product Number</th>
-																			<th class="min-w-70px text-end pb-2">Product Name</th>
-																			<th class="min-w-70px text-end pb-2">Qty</th>
-																			<th class="min-w-80px text-end pb-2">Price</th>
+																			<th class="min-w-175px pb-2">Product Code</th>
+																			<th class="min-w-70px  pb-2">Product Name</th>
+																			<th class="min-w-70px pb-2"> Master Qty</th>
+																			<th class="min-w-70px pb-2">Qty</th>
+																			<th class="min-w-80px pb-2">Price</th>
 																			<th class="min-w-100px text-end pb-2">Total Price</th>
 																		</tr>
 																	</thead>
 																	<tbody>
-                                                                      @foreach( $invoice['product_id']  as $product_key => $data)
-																		<tr class="fw-bolder text-gray-700 fs-5 text-end">
-                                                                        	@foreach($invoice->get_product_detail as $product)
-																			<td class="d-flex align-items-center pt-6">{{$product->product_code}}</td>
-                                                                            <td class="pt-6">{{$product->name}}</td>
-																			<td class="pt-6">{{$invoice['qty'][$product_key]}}</td>
-																			<td class="pt-6">{{$invoice['price'][$product_key]}}</td>
-																			<td class="pt-6">{{$invoice['total_price'][$product_key]}}</td>
-                                                                            @endforeach
+                                                                      @foreach( $data['product_id']  as $key => $val)
+																		<tr class="fw-bolder text-gray-700 fs-4 ">
+																			<td class="d-flex align-items-center pt-6">{{$data['product_code'][$key]}}</td>
+                                                                            <td class="pt-6">{{isset($data['product_name'][$key]) ? $data['product_name'][$key] : ''}}</td>
+																			<td class="pt-6">{{$data['master_qty'][$key]}}</td>
+																			<td class="pt-6">{{$data['qty'][$key]}}</td>
+																			<td class="pt-6">{{$data['price'][$key]}}</td>
+																			<td class="pt-6 text-end">{{$data['total_price'][$key]}}</td>
 																		</tr>
                                                                      @endforeach
 																	</tbody>
@@ -117,7 +117,7 @@
             
             for(var i = 1; i < table.rows.length; i++)
             {
-                sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
+                sumVal = sumVal + parseInt(table.rows[i].cells[5].innerHTML);
             }
             
             document.getElementById("val").innerHTML ="$" + sumVal;

@@ -20,7 +20,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" class="form-control form-control-solid w-250px ps-14" placeholder="Search Invoice" value="{{isset(request()->q) ? request()->q : ''}}" name="q">
+                        <input type="text" class="form-control form-control-solid w-250px ps-14" placeholder="Search Invoice No" value="{{isset(request()->q) ? request()->q : ''}}" name="q">
                     </form>
                     <!--end::Search-->
                 </div>

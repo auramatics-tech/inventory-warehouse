@@ -27,7 +27,7 @@
                     @elseif (Route::is('admin.supplier')=='admin.supplier') Suppliers 
                     @elseif (Route::is('admin.create_supplier')=='admin.create_supplier') Create Supplier
                     @elseif (Route::is('admin.edit_supplier')=='admin.edit_supplier') Update Supplier
-                    @elseif (Route::is('admin.invoice')=='admin.invoice') Invoices 
+                    @elseif (Route::is('admin.invoice')=='admin.invoice') Invoices Details
                     @elseif (Route::is('admin.edit_invoice')=='admin.edit_invoice') Edit Invoice 
                     @elseif (Route::is('admin.new_invoice')=='admin.new_invoice') New Invoice 
                     @elseif (Route::is('admin.profile')=='admin.profile') Edit Profile

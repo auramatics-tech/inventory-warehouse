@@ -73,6 +73,7 @@
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Name</th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Category Name</th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">Product Code</th>
+                                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 224.953px;">product Code From Supplier</th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Role: activate to sort column ascending" style="width: 125px;">Status</th>
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="Two-step: activate to sort column ascending" style="width: 125px;">Created At</th>
                                     <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">Actions</th>
@@ -106,6 +107,7 @@
                                     <!--begin::Role=-->
                                     <td>{{isset($product->get_category_name->name) ? $product->get_category_name->name :'' }}</td>
                                     <td>{{$product->product_code}}</td>
+                                    <td>{{$product->product_code_supplier}}</td>
                                     <td>{{($product->active == 1) ? 'Active' : 'Not Active'}}</td>
                                     <!--end::Role=-->
                                     <!--begin::Last login=-->

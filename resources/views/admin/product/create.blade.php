@@ -32,7 +32,7 @@
                                     @endif
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="" class="mb-3">Product Name</label>
-                                            <input value="{{ isset($product->name) ? $product->name: old('name') }}" type="text" class="form-control" name="name" id="name" placeholder="Product Name">
+                                            <input value="{{ isset($product->name) ? $product->name: old('name') }}" type="text" class="form-control" name="name" id="name" placeholder="Product name">
                                             <span class="invalid-feedback" role="alert">
                                                 <strong id="error_first_name">{{ $errors->first('name') }}</strong>
                                             </span>
@@ -61,43 +61,40 @@
                                                 <strong id="error_first_name">{{ $errors->first('product_code') }}</strong>
                                             </span>
                                         </div>
-                                        {{--<div class="form-group col-md-6 ">
-                                            <label for="" class="mb-3">Product Color</label>
-                                            <input value="{{ isset($product->product_color	) ? $product-> product_color	: old('product_color') }}" type="text" class="form-control" name="product_color" id="product_color" placeholder="Product color">
+                                        <div class="form-group col-md-6 ">
+                                            <label for="" class="mb-3">Product Code From Supplier</label>
+                                            <input value="{{ isset($product->product_code_supplier	) ? $product->product_code_supplier	: old('product_code_supplier') }}" type="text" class="form-control" name="product_code_supplier" id="product_code_supplier" placeholder="Product code from supplier">
                                             <span class="invalid-feedback" role="alert">
-                                                <strong id="error_first_name">{{ $errors->first('product_color') }}</strong>
+                                                <strong id="error_first_name">{{ $errors->first('product_code_supplier') }}</strong>
                                             </span>
-                                        </div>--}}
-                                        {{--<div class="form-group col-md-6 mb-3">
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
                                             <label for="supplier" class="mb-3"> Supplier</label>
                                             <select name="supplier_id" id="supplier" class="form-control">
                                                 <option value="">Select Supplier</option>
                                                 @if(count($suppliers))
                                                 @foreach($suppliers as $key => $supplier)
                                                 <option value="{{$supplier->id}}" @if(isset($product->supplier_id) && $product->supplier_id == $supplier->id) selected
-
                                                     @endif >{{$supplier->name}}
                                                 </option>
                                                 @endforeach
                                                 @endif
                                             </select>
-                                        </div>--}}
-                                        {{--<div class="form-group col-md-6 mb-3">
-                                            <label for="supplier" class="mb-3">Manufacturer</label>
-                                            <select name="manufacturer" id="manufacturer" class="form-control">
-                                                <option value="">Select Manufacturer</option>
-                                                <option value="1" {{ ( isset($product->manufacturer) && $product->manufacturer == 1) ? 'selected' : '' }}>Manufacturer A</option>
-                                                <option value="2" {{ ( isset($product->manufacturer) && $product->manufacturer == 2) ? 'selected' : '' }}>Manufacturer B</option>
-                                                <!-- @if(count($suppliers))
-                                                @foreach($suppliers as $key => $supplier)
-                                                <option value="{{$supplier->id}}" @if(isset($product->supplier)) selected
-
-                                                    @endif >{{$supplier->name}}
-                                                </option>
-                                                @endforeach
-                                                @endif -->
-                                            </select>
-                                        </div>--}}
+                                        </div>
+                                        <div class="form-group col-md-6 ">
+                                            <label for="" class="mb-3">Manufacturer</label>
+                                            <input value="{{ isset($product->manufacturer	) ? $product->manufacturer	: old('manufacturer') }}" type="text" class="form-control" name="manufacturer" id="manufacturer" placeholder="Manufacturer">
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong id="error_first_name">{{ $errors->first('manufacturer') }}</strong>
+                                            </span>
+                                        </div>
+                                        <div class="form-group col-md-6 ">
+                                            <label for="" class="mb-3">Product Color</label>
+                                            <input value="{{ isset($product->product_color	) ? $product-> product_color	: old('product_color') }}" type="text" class="form-control" name="product_color" id="product_color" placeholder="Product color">
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong id="error_first_name">{{ $errors->first('product_color') }}</strong>
+                                            </span>
+                                        </div>
                                         <div class="form-group col-md-6 ">
                                             <label for="" class="mb-3">Active</label>
                                             <div class="d-flex align-items-center">

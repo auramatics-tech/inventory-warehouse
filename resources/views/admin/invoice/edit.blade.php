@@ -54,21 +54,21 @@
                               
                                 @foreach( $invoice['product_id']  as $product_key => $data)
                                 <div class="row mt-5"  id="rowNum{{$product_key}}">
-                                    <div class="form-group col-md-3 mb-3">
-                                        <label for="" class="mb-3">Product Number</label>
-                                        <select name="product_id[]" id="product_code" class="form-control">
-                                                <option>Select Product Number</option>
-                                                @if(count($products))
-                                                @foreach($products as $key => $product)
-                                                <option value="{{$product->id}}"  @if(isset($data)) selected @endif>{{$product->product_code}}</option>
-                                                @endforeach
-                                                @endif
-                                        </select>
-                                    </div>
+                                <div class="form-group  col-md-3 mb-3">
+                                            <input type="hidden" name="p_id[]" id="p_id_0">
+                                            <label for="" class="mb-3">Product Number <button data-bs-toggle="modal" data-bs-target="#add_new_product_modal" class="btn btn-outline-success plusbutton new_product_btn" id="new_product_btn_0" data-id="0" type="button"><i class="fas fa-plus"></i></button></label>
+                                            <input data-id="0" value="{{ isset($invoice->product_code) ? $invoice->product_code: '' }}" type="text" class="form-control search-box" name="product_code[]" id="search_box_0" placeholder="Product Number" required>
+                                            <span class="error" id="empty_msg_0"></span>
+                                            <div id="suggesstion-box_0"></div>
+                                        </div>
                                     <div class="form-group col-md-3 mb-3">
                                         <label for="" class="mb-3">Product Name</label>
                                         <input value="" type="text" class="form-control" name="product_name" id="product_name" placeholder="Product Name">
                                     </div>
+                                    <div class="form-group col-md-2 mb-3">
+                                            <label for="" class="mb-3"> Master Qty</label>
+                                            <input value="{{ isset($invoice->master_qty) ? $invoice->master_qty: '' }}" type="text" class="form-control " name="master_qty[]" id="master_qty" placeholder="Master Qty" required>
+                                        </div>
                                     <div class="form-group col-md-2 mb-3">
                                         <label for="" class="mb-3">Qty</label>
                                         <input value="{{$invoice['qty'][$product_key]}}" type="number" class="form-control " name="qty[]" id="qty_input__{{$product_key}}" placeholder="Qty" onkeyup="add_number('{{$product_key}}')" required>
@@ -84,11 +84,8 @@
                                     @if($product_key)
                                     <input type="button" class="text-white bg-danger cancel_row " value="X" onclick="removeRow1('{{$product_key}}');">
                                     @endif
-                                 
                                 </div>
                                 @endforeach
-                               
-                              
                             </div>
                                 <hr style="border-top: 1px solid #eff2f5;opacity: 1;">
                                 <div class="row mt-5">
