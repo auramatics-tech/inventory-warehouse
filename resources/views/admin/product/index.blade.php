@@ -136,6 +136,11 @@
                                                 <a href="javascript:" rel="{{ $product->id }}" rel1="delete-product" class="deleteRecord menu-link px-3">Delete</a>
                                             </div>
                                             <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="{{route('admin.find_products' ,$product->id)}}" class="menu-link px-3">Assign tech</a>
+                                            </div>
+                                            <!--end::Menu item-->
                                         </div>
                                         <!--end::Menu-->
                                     </td>

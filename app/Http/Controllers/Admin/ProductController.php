@@ -10,6 +10,7 @@ use Hash;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Product;
+use App\Models\Technician;
 use Auth;
 use Helper;
 
@@ -65,5 +66,20 @@ class ProductController extends Controller
         $product = Product::Find($id);
         $product->delete();
         return back()->with('success','Data deleted successfully');
+    }
+
+    public function find_products($id){
+        $product = Product::find($id);
+        // $techs = Technician::where()->get();
+        return view('admin.product.find_product' , compact('product'));
+
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $data = Product::select("name")
+                    ->where('name', 'LIKE', '%'. $request->get('query'). '%')
+                    ->get();
+        return response()->json($data);
     }
 }
