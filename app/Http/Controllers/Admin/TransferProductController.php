@@ -29,37 +29,69 @@ class TransferProductController extends Controller
         $branches = Branch::whereIn('id', $branch_id)->get();
         return response($branches);
     }
-    // public function get_shelves(Request $request)
-    // {
-    //     $shelves = Shelve::where('branch', $request->branch_id)->get();
-    //     return response($shelves);
-    // }
+    public function get_shelves(Request $request)
+    {
+        $shelves = Shelve::where('branch', $request->branch_id)->get();
+        return response($shelves);
+    }
 
     public function store_transfer_products(Request $request)
     {
-        echo "<pre>";print_r($request->all());die;
-        $transfer_product = new TransferProduct();
-        $transfer_product->product_id = $request->product_name;
-        $transfer_product->from_branch =  $request->from_branch;
-        $transfer_product->to_branch = $request->to_branch;
-        // $transfer_product->shelve = $request->shelve;
-        $transfer_product->quantity = $request->quantity;
-        $transfer_product->save();
-        $update_from_branch = ProductQuantity::where('product_id', $request->product_name)->where('branch', $request->from_branch)->first();
-        $update_from_branch->qty = $update_from_branch->qty - $request->quantity;
-        // echo "<pre>";print_r($update_from_branch);die;
-        $update_from_branch->save();
-        $update_to_branch = ProductQuantity::where('product_id', $request->product_name)->where('branch', $request->to_branch)->first();
-        if (!empty($update_to_branch)) {
-            $update_to_branch->qty = $update_to_branch->qty + $request->quantity;
-            $update_to_branch->save();
-        } else {
-            $update_to_branch = new ProductQuantity();
-            $update_to_branch->product_id = $request->product_name;
-            $update_to_branch->branch =  $request->to_branch;
-            $update_to_branch->qty =  $request->quantity;
-            $update_to_branch->save();
+        // echo "<pre>";
+        // print_r($request->all());
+        // die;
+        if (count($request->product_name)) {
+            foreach ($request->product_name as $key => $val) {
+                
+            }
         }
+        if (count($request->product_name)) {
+            foreach ($request->product_name as $key => $val) {
+                $transfer_product = new TransferProduct();
+                $transfer_product->product_id = $val;
+                $transfer_product->from_branch =  $request->from_branch[$key];
+                $transfer_product->to_branch = $request->to_branch[$key];
+                $transfer_product->shelve = $request->shelve[$key];
+                $transfer_product->quantity = $request->quantity[$key];
+                $transfer_product->save();
+                $update_from_branch = ProductQuantity::where('product_id', $request->product_name[$key])->where('branch', $request->from_branch[$key])->first();
+                $update_from_branch->qty = $update_from_branch->qty - $request->quantity[$key];
+                $update_from_branch->save();
+                $update_to_branch = ProductQuantity::where('product_id', $request->product_name[$key])->where('branch', $request->to_branch[$key])->first();
+                if (!empty($update_to_branch)) {
+                    $update_to_branch->qty = $update_to_branch->qty + $request->quantity[$key];
+                    $update_to_branch->save();
+                } else {
+                    $update_to_branch = new ProductQuantity();
+                    $update_to_branch->product_id = $request->product_name[$key];
+                    $update_to_branch->branch =  $request->to_branch[$key];
+                    $update_to_branch->qty =  $request->quantity[$key];
+                    $update_to_branch->save();
+                }
+            }
+        }
+        // $transfer_product = new TransferProduct();
+        // $transfer_product->product_id = $request->product_name;
+        // $transfer_product->from_branch =  $request->from_branch;
+        // $transfer_product->to_branch = $request->to_branch;
+        // // $transfer_product->shelve = $request->shelve;
+        // $transfer_product->quantity = $request->quantity;
+        // $transfer_product->save();
+        // $update_from_branch = ProductQuantity::where('product_id', $request->product_name)->where('branch', $request->from_branch)->first();
+        // $update_from_branch->qty = $update_from_branch->qty - $request->quantity;
+        // // echo "<pre>";print_r($update_from_branch);die;
+        // $update_from_branch->save();
+        // $update_to_branch = ProductQuantity::where('product_id', $request->product_name)->where('branch', $request->to_branch)->first();
+        // if (!empty($update_to_branch)) {
+        //     $update_to_branch->qty = $update_to_branch->qty + $request->quantity;
+        //     $update_to_branch->save();
+        // } else {
+        //     $update_to_branch = new ProductQuantity();
+        //     $update_to_branch->product_id = $request->product_name;
+        //     $update_to_branch->branch =  $request->to_branch;
+        //     $update_to_branch->qty =  $request->quantity;
+        //     $update_to_branch->save();
+        // }
         return response('success');
     }
 

@@ -33,18 +33,16 @@ class InvoiceController extends Controller
         $branches = Branch::where('active', 1)->orderby('id', 'desc')->get();
         $categories = Category::where('active', 1)->orderby('id', 'desc')->get();
         $suppliers = Supplier::orderby('id', 'desc')->get();
-        $products = Product::where('active', 1)->orderby('id', 'desc')->get();
-        return view('admin.invoice.create', compact('products', 'suppliers', 'categories', 'branches'));
+        return view('admin.invoice.create', compact( 'suppliers', 'categories', 'branches'));
     }
     public function edit_invoice($id)
     {
         $invoice = Invoice::Find($id);
-        $invoice_product = InvoiceProduct::where('invoice_id', $id)->get();
+        $invoice_product = InvoiceProduct::where('invoice_id' , $id)->get();
         // echo"<pre>";print_r($invoice_product);die;
         $branches = Branch::where('active', 1)->orderby('id', 'desc')->get();
         $categories = Category::where('active', 1)->orderby('id', 'desc')->get();
         $suppliers = Supplier::orderby('id', 'desc')->get();
-        $products = Product::orderby('id', 'desc')->get();
         // $data['product_id'] = json_decode($invoice['product_id'], true);
         // $data['product_code'] = json_decode($invoice['product_code'], true);
         // $data['product_name'] = json_decode($invoice['product_name'], true);
@@ -53,19 +51,18 @@ class InvoiceController extends Controller
         // $data['total_price'] = json_decode($invoice['total_price'], true);
         // $data['branch'] = json_decode($invoice['branch'], true);
         // $data['master_qty'] = json_decode($invoice['master_qty'], true);
-        return view('admin.invoice.create', compact('products', 'suppliers', 'categories', 'branches',  'invoice', 'invoice_product'));
+        return view('admin.invoice.create', compact( 'suppliers', 'categories', 'branches', 'invoice_product', 'invoice'));
     }
     public function store_invoice(Request $request)
     {
-        // echo "<pre>";
-        // print_r($request->all());
-        // die;
-        if (isset($request->id)) {
+        // echo"<pre>";print_r($request->all());die;
+        if(isset($request->id)){
             $invoice = Invoice::Find($request->id);
-        } else {
-
+            $invoice_product = InvoiceProduct::where('invoice_id',$request->id)->delete();
+        }else{
             $invoice = new Invoice();
         }
+        
         $invoice->supplier_name = $request->supplier_name;
         $invoice->supplier_invoice_number = $request->supplier_invoice_number;
         $invoice->invoice_date = $request->invoice_date;
@@ -85,7 +82,12 @@ class InvoiceController extends Controller
                 $transfer_product->save();
                 $update_product_qty = ProductQuantity::where('product_id', $request->p_id[$key])->where('branch', $request->branch[$key])->first();
                 if (!empty($update_product_qty)) {
-                    $update_product_qty->qty = $update_product_qty->qty + $request->qty[$key];
+                    if(isset($request->id)){
+                        $qty = $request->qty[$key];
+                    }else{
+                        $qty = $update_product_qty->qty + $request->qty[$key];
+                    }
+                    $update_product_qty->qty = $qty;
                     $update_product_qty->save();
                 } else {
                     $product_qty = new ProductQuantity();
@@ -155,7 +157,7 @@ class InvoiceController extends Controller
     {
         $products = Product::when(isset($request->keyword), function ($query) use ($request) {
             $query->where('products.product_code', 'LIKE', '%' . $request->keyword . '%');
-        })->where('active', 1)->get();
+        })->where('active',1)->get();
         // echo"<pre>";print_r($products->all());die;
         return response($products);
     }
