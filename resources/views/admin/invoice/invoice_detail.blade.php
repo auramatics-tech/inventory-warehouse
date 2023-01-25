@@ -60,16 +60,16 @@
 																		</tr>
 																	</thead>
 																	<tbody>
-                                                                      @foreach( $data['product_id']  as $key => $val)
+                                                                     @foreach($invoice_product  as $key => $val)
 																		<tr class="fw-bolder text-gray-700 fs-4 ">
-																			<td class="d-flex align-items-center pt-6">{{$data['product_code'][$key]}}</td>
-                                                                            <td class="pt-6">{{isset($data['product_name'][$key]) ? $data['product_name'][$key] : ''}}</td>
-																			<td class="pt-6">{{$data['master_qty'][$key]}}</td>
-																			<td class="pt-6">{{$data['qty'][$key]}}</td>
-																			<td class="pt-6">{{$data['price'][$key]}}</td>
-																			<td class="pt-6 text-end">{{$data['total_price'][$key]}}</td>
+																			<td class="d-flex align-items-center pt-6">{{isset($val->product_code) ? $val->product_code : ''}}</td>
+                                                                            <td class="pt-6">{{isset($val->product_name) ? $val->product_name : ''}}</td>
+																			<td class="pt-6">{{isset($val->master_qty) ? $val->master_qty : ''}}</td>
+																			<td class="pt-6">{{isset($val->qty) ? $val->qty : ''}}</td>
+																			<td class="pt-6">{{isset($val->price) ? $val->price : ''}}</td>
+																			<td class="pt-6 text-end">{{$val->total_price}}</td>
 																		</tr>
-                                                                     @endforeach
+                                                                     @endforeach 
 																	</tbody>
 																</table>
 															</div>

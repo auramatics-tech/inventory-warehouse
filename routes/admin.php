@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ShelveController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\TransferProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,4 +85,17 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/delete-invoice/{id}', [InvoiceController::class, 'delete_invoice'])->name('admin.delete_invoice');
     Route::post('/store-invoice', [InvoiceController::class, 'store_invoice'])->name('admin.store_invoice');
     Route::get('/invoice-detail/{id}', [InvoiceController::class, 'invoice_detail'])->name('admin.invoice_detail');
+
+    //transfer product 
+    Route::get('/transfer-product', [TransferProductController::class, 'index'])->name('admin.transfer_product');
+    Route::get('/get-branches', [TransferProductController::class, 'get_branches'])->name('admin.get_branches');
+    Route::get('/get-shelves', [TransferProductController::class, 'get_shelves'])->name('admin.get_shelves');
+    Route::get('/get-quantity', [TransferProductController::class, 'get_quantity'])->name('admin.get_quantity');
+    Route::post('/store-transfer-products', [TransferProductController::class, 'store_transfer_products'])->name('admin.store_transfer_products');
+
+
+    //transfer product history 
+    
+    Route::get('/transfer-product-history', [TransferProductController::class, 'transfer_product_history'])->name('admin.transfer_product_history');
+    
 }); 

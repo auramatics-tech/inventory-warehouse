@@ -99,19 +99,19 @@
                                     <div class="d-flex justify-content-end">
                                         <input onclick="addRow(this.form);" type="button" class="btn btn-primary py-2" value=" + Add row" />
                                     </div>
-                                    @if(isset($data['product_id']) && count($data['product_id']))
-                                    @foreach($data['product_id'] as $key => $val)
+                                    @if(isset($invoice_product) && count($invoice_product))
+                                    @foreach($invoice_product as $key => $val)
                                     <div class="row mt-5" id="rowNum{{$key}}">
                                         <div class="form-group  col-md-3 mb-3">
-                                            <input type="hidden" name="p_id[]" id="p_id_{{$key}}" value="{{$val}}">
+                                            <input type="hidden" name="p_id[]" id="p_id_{{$key}}" value="{{$val->product_id}}">
                                             <label for="" class="mb-3">Product Code <button data-bs-toggle="modal" data-bs-target="#add_new_product_modal" class="btn btn-outline-success plusbutton new_product_btn" id="new_product_btn_{{$key}}" data-id="{{$key}}" type="button"><i class="fas fa-plus"></i></button></label>
-                                            <input data-id="{{$key}}" value="{{isset($data['product_code'][$key]) ? $data['product_code'][$key] : ''}}" type="text" class="form-control search-box" name="product_code[]" id="search_box_{{$key}}" placeholder="Product Code" required>
+                                            <input data-id="{{$key}}" value="{{isset($val->product_code) ? $val->product_code : ''}}" type="text" class="form-control search-box" name="product_code[]" id="search_box_{{$key}}" placeholder="Product Code" required>
                                             <span class="error" id="empty_msg_{{$key}}"></span>
                                             <div id="suggesstion-box_{{$key}}"></div>
                                         </div>
                                         <div class="form-group col-md-3 mb-3">
                                             <label for="" class="mb-3">Product Name</label>
-                                            <input value="{{isset($data['product_name'][$key]) ? $data['product_name'][$key] : ''}}" type="text" class="form-control" name="product_name[]" id="product_name_{{$key}}" placeholder="Product Name" required>
+                                            <input value="{{isset($val->product_name) ? $val->product_name : ''}}" type="text" class="form-control" name="product_name[]" id="product_name_{{$key}}" placeholder="Product Name" required>
                                         </div>
                                         <div class="form-group col-md-3 mb-3">
                                             <label for="branch" class="mb-3">Branch</label>
@@ -119,7 +119,7 @@
                                                 <option value="">Select Branch</option>
                                                 @if(count($branches))
                                                 @foreach($branches as $branch)
-                                                <option value="{{$branch->id}}" @if(isset($data['branch'][$key]) && $data['branch'][$key] == $branch->id) selected
+                                                <option value="{{$branch->id}}" @if(isset($val->branch) && $val->branch == $branch->id) selected
                                                     @endif >{{$branch->name}}
                                                 </option>
                                                 @endforeach
@@ -128,19 +128,19 @@
                                         </div>
                                         <div class="form-group col-md-2 mb-3">
                                             <label for="" class="mb-3"> Master Qty</label>
-                                            <input value="{{isset($data['master_qty'][$key]) ? $data['master_qty'][$key] : ''}}" type="text" class="form-control " name="master_qty[]" id="master_qty_{{$key}}" placeholder="Master Qty" required>
+                                            <input value="{{isset($val->master_qty) ? $val->master_qty : ''}}" type="text" class="form-control " name="master_qty[]" id="master_qty_{{$key}}" placeholder="Master Qty" required>
                                         </div>
                                         <div class="form-group col-md-2 mb-3">
                                             <label for="" class="mb-3">Qty</label>
-                                            <input value="{{isset($data['qty'][$key]) ? $data['qty'][$key] : ''}}" type="number" class="form-control " name="qty[]" id="qty_input_{{$key}}" placeholder="Qty" onkeyup="add_number_m({{$key}})" required>
+                                            <input value="{{isset($val->qty) ? $val->qty : ''}}" type="number" class="form-control " name="qty[]" id="qty_input_{{$key}}" placeholder="Qty" onkeyup="add_number_m({{$key}})" required>
                                         </div>
                                         <div class="form-group col-md-2 mb-3">
                                             <label for="" class="mb-3">Price/item</label>
-                                            <input value="{{isset($data['price'][$key]) ? $data['price'][$key] : ''}}" type="number" class="form-control price_input" name="price[]" id="price_input_{{$key}}" placeholder="Price " onkeyup="add_number_m({{$key}})" required>
+                                            <input value="{{isset($val->price) ? $val->price : ''}}" type="number" class="form-control price_input" name="price[]" id="price_input_{{$key}}" placeholder="Price " onkeyup="add_number_m({{$key}})" required>
                                         </div>
                                         <div class="form-group col-md-2 mb-3">
                                             <label for="" class="mb-3">Total Price</label>
-                                            <input value="{{isset($data['total_price'][$key]) ? $data['total_price'][$key] : ''}}" type="number" class="form-control total_input" name="total_price[]" id="total_price_{{$key}}" placeholder="Total Price" required>
+                                            <input value="{{isset($val->total_price) ? $val->total_price : ''}}" type="number" class="form-control total_input" name="total_price[]" id="total_price_{{$key}}" placeholder="Total Price" required>
                                         </div>
                                         @if($key)
                                     <input type="button" class="text-white bg-danger cancel_row " value="X" onclick="removeRow('{{$key}}')">
@@ -327,7 +327,7 @@
     <!--end::Page Scripts-->
     <script>
         @if(isset($data['product_id']) && count($data['product_id']))
-        var rowNum = "{{(count($data['product_id'])-1)}}";
+        var rowNum = "{{(count($invoice_product)-1)}}";
         @else
         var rowNum = 0;
         @endif
