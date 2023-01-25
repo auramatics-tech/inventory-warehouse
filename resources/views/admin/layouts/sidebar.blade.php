@@ -255,7 +255,6 @@
                         <span class="menu-title">Find Products</span>
                         <!-- <span class="menu-arrow"></span> -->
                     </span>
-                   
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">

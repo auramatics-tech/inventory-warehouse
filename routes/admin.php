@@ -93,5 +93,11 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/get-quantity', [TransferProductController::class, 'get_quantity'])->name('admin.get_quantity');
     Route::post('/store-transfer-products', [TransferProductController::class, 'store_transfer_products'])->name('admin.store_transfer_products');
     Route::get('/transfer-product-history', [TransferProductController::class, 'transfer_product_history'])->name('admin.transfer_product_history');
+
+
+    //find Products
+    
+    Route::get('/find-product/{product_id}', [ProductController::class, 'find_products'])->name('admin.find_products');
+    Route::get('/autocomplete', [ProductController::class, 'autocomplete'])->name('admin.autocomplete');
     
 }); 
